@@ -56,15 +56,15 @@ class UserControler extends Controller
     {
         try {
             $request->validate([
-                'no_telp_wali' => 'required|string',
+                'email' => 'required|string',
                 'password' => 'required'
             ]);
 
-            $user = User::where('no_telp_wali', $request->no_telp_wali)->first();
+            $user = User::where('email', $request->email)->first();
 
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return ResponseFormatter::error([
-                    'message' => 'Nomor telepon atau password salah'
+                    'message' => 'email atau password salah'
                 ], 'Authentication Failed', 401);
             }
 
@@ -74,6 +74,9 @@ class UserControler extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 // 'user' => $user
+                'user' => [
+        'peran' => $user->peran  // Pastikan 'status' ada di sini
+    ]
             ], 'Authenticated');
         } catch (Exception $error) {
             return ResponseFormatter::error([

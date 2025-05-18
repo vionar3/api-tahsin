@@ -26,4 +26,8 @@ class SubMateri extends Model
     {
         return $this->hasMany(Latihan::class);
     }
+    public function kategori()
+{
+    return $this->belongsTo(Kategori::class, 'id_kategori');
+}
 }

@@ -20,8 +20,8 @@ class Kategori extends Model
 
     // Relasi dengan sub materi
     public function subMateri()
-    {
-        return $this->hasMany(SubMateri::class);
-    }
+{
+    return $this->hasMany(SubMateri::class, 'id_kategori');
+}
 
 }

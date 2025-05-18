@@ -30,5 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/materi', [MateriControler::class, 'getMateri']);
 Route::get('/kategori/{id_materi}', [KategoryController::class, 'getKategoriByMateri']);
+// Route::get('/sub_materi', [SubMateriControler::class, 'getAllSubMateri']);
 Route::get('/sub_materi/{id_kategori}', [SubMateriControler::class, 'getSubMateriByKategori']);
 Route::get('/latihan/{id_submateri}', [LatihanControler::class, 'getLatihanBySubMateri']);

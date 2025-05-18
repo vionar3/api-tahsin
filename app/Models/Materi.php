@@ -16,6 +16,7 @@ class Materi extends Model
     protected $fillable = [
         'title',
         'subtitle',
+        'description',
     ];
 
     // Relasi dengan kategori

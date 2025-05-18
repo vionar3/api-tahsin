@@ -14,34 +14,19 @@ class SubMateriTableSeeder extends Seeder
     public function run(): void
     {
         SubMateri::create([
-            'id_kategori' => 1, // Mengacu pada kategori "Rongga Mulut"
-            'title' => 'Mad',
-            'subtitle' => 'rongga mulut',
+            'id_kategori' => 2, // Mengacu pada kategori "Rongga Mulut"
+            'title' => 'ain & ha',
+            'subtitle' => 'tengah tenggorokan',
             'video_url' => 'https://youtu.be/qF_HuLMI-B4?si=IJWIzHu-vQXBaKgD',
             'intro' => 'Pengenalan rongga mulut',
         ]);
 
         SubMateri::create([
             'id_kategori' => 2, // Mengacu pada kategori "Tenggorokan"
-            'title' => 'Hamzah',
-            'subtitle' => 'Pangkal Tenggorokan',
+            'title' => 'ghain & ha',
+            'subtitle' => 'ujung tenggorokan',
             'video_url' => 'https://youtu.be/qF_HuLMI-B4?si=IJWIzHu-vQXBaKgD',
             'intro' => 'Penjelasan tentang pangkaltenggorokan',
-        ]);
-        SubMateri::create([
-            'id_kategori' => 3, // Mengacu pada kategori "Rongga Mulut"
-            'title' => 'Hamz vs Jahr',
-            'subtitle' => 'Keluar nafas vs tidak keluar nafas',
-            'video_url' => 'https://youtu.be/qF_HuLMI-B4?si=IJWIzHu-vQXBaKgD',
-            'intro' => 'Pengenalan sifat hams dan jahr',
-        ]);
-
-        SubMateri::create([
-            'id_kategori' => 4, // Mengacu pada kategori "Tenggorokan"
-            'title' => 'Qalqalah',
-            'subtitle' => 'Suara memantul',
-            'video_url' => 'https://youtu.be/qF_HuLMI-B4?si=IJWIzHu-vQXBaKgD',
-            'intro' => 'Penjelasan tentang qalqalah',
         ]);
         
     }
