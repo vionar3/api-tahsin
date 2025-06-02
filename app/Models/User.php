@@ -26,6 +26,9 @@ class User extends Authenticatable
         'peran',
         'email',
         'password',
+        'usia',
+        'jenis_kelamin',
+        'jenjang_pendidikan',
     ];
 
     /**

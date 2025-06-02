@@ -24,4 +24,10 @@ class Materi extends Model
     {
         return $this->hasMany(Kategori::class);
     }
+
+    // Relasi dengan tabel quiz
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class, 'id_materi');
+    }
 }
