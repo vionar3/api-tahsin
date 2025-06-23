@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\API\UserControler;
+use App\Http\Controllers\API\ChangePassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MateriControler;
+use App\Http\Controllers\API\UploadAudioController;
 use App\Http\Controllers\API\KategoryController;
 use App\Http\Controllers\API\SubMateriControler;
 use App\Http\Controllers\API\LatihanControler;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\API\ProgressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +26,12 @@ use App\Http\Controllers\QuizController;
 
 Route::post('register', [UserControler::class, 'register']);
 Route::post('login', [UserControler::class, 'login']);
+Route::post('loginWithTelp', [UserControler::class, 'loginWithTelp']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserControler::class, 'fetch']);
     Route::post('logout', [UserControler::class, 'logout']);
+    Route::post('/change_password', [UserControler::class, 'changePassword']);
 });
 
 Route::get('/materi', [MateriControler::class, 'getMateri']);
@@ -53,5 +58,27 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/updateUser/{id}', [UserControler::class, 'updateUserById']);
 
     Route::post('/tambahSantri', [UserControler::class, 'tambahSantri']);
+
+    Route::get('/userByToken', [UserControler::class, 'getUserInfoByToken']);
+
+    // Memperbarui data pengguna berdasarkan token
+    Route::post('/user/updateBytoken', [UserControler::class, 'updateUserByToken']);
+    Route::post('/importSantri', [UserControler::class, 'importSantri']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/materi/{materiId}/progress', [ProgressController::class, 'getMateriProgress']);
+    Route::post('/progress/{subMateriId}/update', [ProgressController::class, 'updateProgress']);
+    Route::get('/progress/{subMateriId}/status', [ProgressController::class, 'getProgressBySubMateri']);
+    Route::get('/progres/presentase', [ProgressController::class, 'getProgressPercentage']);
+    Route::get('/progres/{user_id}', [ProgressController::class, 'getProgressPercentageById']);
+    Route::put('latihan/{id_latihan}/saverecord', [ProgressController::class, 'saveRecordedAudioName']);
+    Route::post('progress/{submateri_id}/save', [ProgressController::class, 'saveProgress']);
+    Route::get('/hasil-penilaian/{submateri_id}', [ProgressController::class, 'getHasilPenilaianByUserAndSubMateri']);
+    Route::post('/upload_audio', [UploadAudioController::class, 'uploadAudio']);
+});
+
+
+
+Route::get('/users/progres', [UserControler::class, 'getUserProgres']);
 

@@ -20,6 +20,14 @@ class Latihan extends Model
         'materi_description',
         'correct_audio',
         'recorder_audio',
+        'feedback_pengajar',
+        'nilai',
+        'status',
     ];
+
+    public function progress()
+    {
+        return $this->hasMany(Progress::class, 'id_latihan'); // Relasi balik ke Progress
+    }
 
 }
