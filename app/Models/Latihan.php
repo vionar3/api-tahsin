@@ -20,9 +20,9 @@ class Latihan extends Model
         'materi_description',
         'correct_audio',
         'recorder_audio',
-        'feedback_pengajar',
-        'nilai',
-        'status',
+        // 'feedback_pengajar',
+        // 'nilai',
+        // 'status',
     ];
 
     public function progress()

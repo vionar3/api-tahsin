@@ -30,4 +30,9 @@ class SubMateri extends Model
 {
     return $this->belongsTo(Kategori::class, 'id_kategori');
 }
+
+public function progresses()
+{
+    return $this->hasMany(Progress::class);
+}
 }

@@ -121,6 +121,7 @@ class UserControler extends Controller
             'access_token' => $tokenResult,
             'token_type' => 'Bearer',
             'user' => [
+                'id' => $user->id,
                 'peran' => $user->peran  // Ensure 'peran' is included here
             ]
         ], 'Authenticated');
@@ -496,22 +497,23 @@ public function getUserProgres(Request $request)
             $progresData = Progress::where('user_id', $santri->id)
                                    ->where('status', 'selesai') // Menghitung submateri yang sudah selesai
                                    ->with('submateri') // Load data submateri yang terkait
-                                   ->get();
+                                   ->orderBy('updated_at', 'desc') // Ambil yang terakhir berdasarkan updated_at
+                                   ->first();  // Ambil hanya satu data yang terbaru (progres terakhir)
 
-            // Hitung jumlah submateri yang selesai
-            $completedSubmateriCount = $progresData->count();  // Menghitung jumlah data progres yang selesai
-
-            // Hanya tampilkan santri yang telah menyelesaikan submateri
-            if ($completedSubmateriCount > 0) {
+            // Cek jika progres ada dan sudah selesai
+            if ($progresData) {
                 return [
                     'user_id' => $santri->id,
                     'nama_lengkap' => $santri->nama_lengkap,
                     'no_telp_wali' => $santri->no_telp_wali,
-                    'completed_submateri' => $completedSubmateriCount,  // Jumlah submateri yang telah selesai
+                    'completed_submateri' => 1,  // Hanya tampilkan yang sudah selesai
+                    'status' => $progresData->status,
+                    'nilai' => $progresData->nilai,
+                    'updated_at' => $progresData->updated_at,
                 ];
             }
         })->filter(function ($santri) {
-            return $santri !== null;  // Filter out santri that haven't completed any submateri
+            return $santri !== null;  // Filter out santri yang tidak ada progres yang selesai
         });
 
         // Jika tidak ada santri yang menyelesaikan submateri
@@ -535,6 +537,7 @@ public function getUserProgres(Request $request)
         ], 500);
     }
 }
+
 
 
 

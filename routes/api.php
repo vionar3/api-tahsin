@@ -73,9 +73,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/progres/presentase', [ProgressController::class, 'getProgressPercentage']);
     Route::get('/progres/{user_id}', [ProgressController::class, 'getProgressPercentageById']);
     Route::put('latihan/{id_latihan}/saverecord', [ProgressController::class, 'saveRecordedAudioName']);
-    Route::post('progress/{submateri_id}/save', [ProgressController::class, 'saveProgress']);
+    // Route::post('progress/{submateri_id}/save', [ProgressController::class, 'saveProgress']);
     Route::get('/hasil-penilaian/{submateri_id}', [ProgressController::class, 'getHasilPenilaianByUserAndSubMateri']);
+    // Route::post('/upload_audio', [UploadAudioController::class, 'uploadAudio']);
     Route::post('/upload_audio', [UploadAudioController::class, 'uploadAudio']);
+    Route::post('/update_progress_status', [ProgressController::class, 'updateStatusBatch']);
+
+    Route::get('/progress/menunggu', [ProgressController::class, 'progressMenunggu']);
+
+    Route::get('/progress/latihan/{user_id}/{sub_materi_id}', [ProgressController::class, 'getProgressLatihanByUserAndSubmateri']);
+    Route::post('save_penilaian', [ProgressController::class, 'savePenilaian']);
+
+
 });
 
 
